@@ -7,9 +7,7 @@ package cookies;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 /**
  *
@@ -37,7 +35,20 @@ public class Servlet2 extends HttpServlet {
             out.println("<title>Servlet Servlet2</title>");            
             out.println("</head>");
             out.println("<body>");
-            String name=request.getParameter("name");
+            // Getting all the cookie
+            Cookie [] cookies=request.getCookies();
+            boolean f=false;
+            String name="";
+            if(cookies==null){
+                out.println("<h1>You are new user go to home page to submit name</h1>");
+                return;
+            }else{
+                for(Cookie c:cookies){
+                    if(c.getName().equals("user_name")){
+                        name=c.getValue();
+                    }
+                }
+            }
             out.println("<h1>Hello, "+name+" welcome to my website...</h1>");
             out.println("<h1>Thank you</h1>");
             out.println("</body>");

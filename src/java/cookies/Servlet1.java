@@ -7,6 +7,7 @@ package cookies;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,10 @@ public class Servlet1 extends HttpServlet {
             String name=request.getParameter("name");
             out.println("<h1>Hello, "+ name +" welcome to my website...</h1>");
             out.println("<h1><a href='Servlet2'>Go to servlet 2</a></h1>");
+            
+            //Create a Cookie 
+            Cookie c=new Cookie("user_name",name);
+            response.addCookie(c);
             out.println("</body>");
             out.println("</html>");
         }
